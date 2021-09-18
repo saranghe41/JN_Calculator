@@ -14,6 +14,7 @@
 		5AF4B4D026F318710027D826 /* JN_Calculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AF4B4CE26F318710027D826 /* JN_Calculator.xcdatamodeld */; };
 		5AF4B4D226F318710027D826 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AF4B4D126F318710027D826 /* Assets.xcassets */; };
 		5AF4B4D526F318710027D826 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AF4B4D326F318710027D826 /* LaunchScreen.storyboard */; };
+		5AF4B4DD26F321930027D826 /* cornerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF4B4DC26F321930027D826 /* cornerButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5AF4B4D126F318710027D826 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AF4B4D426F318710027D826 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5AF4B4D626F318710027D826 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5AF4B4DC26F321930027D826 /* cornerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cornerButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				5AF4B4D326F318710027D826 /* LaunchScreen.storyboard */,
 				5AF4B4D626F318710027D826 /* Info.plist */,
 				5AF4B4CE26F318710027D826 /* JN_Calculator.xcdatamodeld */,
+				5AF4B4DC26F321930027D826 /* cornerButton.swift */,
 			);
 			path = JN_Calculator;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			files = (
 				5AF4B4CA26F318710027D826 /* ViewController.swift in Sources */,
 				5AF4B4C626F318710027D826 /* AppDelegate.swift in Sources */,
+				5AF4B4DD26F321930027D826 /* cornerButton.swift in Sources */,
 				5AF4B4C826F318710027D826 /* SceneDelegate.swift in Sources */,
 				5AF4B4D026F318710027D826 /* JN_Calculator.xcdatamodeld in Sources */,
 			);
