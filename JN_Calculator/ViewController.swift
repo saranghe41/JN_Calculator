@@ -8,11 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var LabelMain: UILabel!
     @IBOutlet var NumberBtns: [cornerButton]!
     @IBOutlet weak var ClearBtn: cornerButton!
-    @IBOutlet var arithOperationBtns: [cornerButton]!
+    @IBOutlet var OperationBtns: [cornerButton]!
     @IBOutlet weak var SumBtn: cornerButton!
     
     var numberString = "" {
@@ -25,9 +25,9 @@ class ViewController: UIViewController {
     }
     var numberHistory = Array<Dictionary<String,Decimal>>()
     var numberCalcString: String = ""
-    var fstNumber: Decimal?
+    var fstNumber: Decimal = 0.0
     var secNumber: Decimal?
-    var arithOperation: String = ""
+    var operationBtnTag: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +42,8 @@ class ViewController: UIViewController {
         ClearBtn.addTarget(self, action: #selector(onClearBtnClicked(sender:)), for: .touchUpInside)
         
         // (Add, Min, Multi, Div)Btn event 명시
-        for btnItem in arithOperationBtns {
-            btnItem.addTarget(self, action: #selector(onArithOperationBtnClicked(sender:)), for: .touchUpInside)
+        for btnItem in OperationBtns {
+            btnItem.addTarget(self, action: #selector(onOperationBtnClicked(sender:)), for: .touchUpInside)
         }
         
         // Add SumBtn event
@@ -54,66 +54,87 @@ class ViewController: UIViewController {
     @objc fileprivate func onNumberBtnClicked(sender: UIButton) {
         guard let inputString = sender.titleLabel?.text else { return }
         
-        var flag = false
-        for btnItem in arithOperationBtns {
-            if btnItem.isSelected {
-                flag = true
-            }
-        }
-        
         // Selected arithOperationBtn
-        if flag {
+        if operationBtnTag != nil {
+            for btn in OperationBtns {
+                if btn.tag == operationBtnTag {
+                    btn.isSelected = false
+                    btn.backgroundColor = .systemOrange
+                    btn.titleLabel!.textColor = .black
+                    operationBtnTag = nil
+                    break
+                }
+            }
             numberString.removeAll()
+            numberString.append("0")
         }
         
+        if numberString.first == "0" { numberString.removeFirst() }
         numberString.append(inputString)
     }
     
     // Clciked ClearBtn
     @objc fileprivate func onClearBtnClicked(sender: UIButton) {
-        guard let inputString = sender.titleLabel?.text else { return }
-        
-        if inputString == "C" {
+        if let inputString = sender.titleLabel?.text {
             numberString.removeAll()
-        }
-        else if inputString == "AC" {
-            numberCalcString.removeAll()
+            numberString.append("0")
         }
     }
     
     // Clicked (Add, Min, Multi, Div)Btn
-    @objc fileprivate func onArithOperationBtnClicked(sender: UIButton) {
-        guard let arithOper = sender.titleLabel?.text else { return }
-        
-        // Selected Btn
-        for btnItem in arithOperationBtns {
-            btnItem.isSelected = false
+    @objc fileprivate func onOperationBtnClicked(sender: UIButton) {
+        let selectedOperationBtnTag = sender.tag
+
+        if secNumber == nil {
+            secNumber = Decimal(string: numberString)
         }
-        sender.isSelected = true
-        
-        switch arithOper {
-        case "+":
-            arithOperation.removeAll()
-            arithOperation.append("+")
-            break
-        case "﹣":
-            arithOperation.removeAll()
-            arithOperation.append("-")
-            break
-        case "×":
-            arithOperation.removeAll()
-            arithOperation.append("*")
-            break
-        case "÷":
-            arithOperation.removeAll()
-            arithOperation.append("/")
-            break
-        default:
-            break
+        else {
+            switch operationBtnTag {
+            case 1:
+                // Add
+                fstNumber = fstNumber + secNumber!
+                secNumber = nil
+                numberString.removeAll()
+                break
+            case 2:
+                // Miner
+                fstNumber = fstNumber - secNumber!
+                secNumber = nil
+                break
+            case 3:
+                // Multi
+                fstNumber = fstNumber * secNumber!
+                secNumber = nil
+                break
+            case 4:
+                // Division
+                fstNumber = fstNumber / secNumber!
+                secNumber = nil
+                break
+            default:
+                break
+            }
         }
-        
-        arithOperation.removeAll()
-        arithOperation.append(arithOper)
+
+        if operationBtnTag != nil {
+            if operationBtnTag != selectedOperationBtnTag {
+                for btn in OperationBtns {
+                    if btn.tag == operationBtnTag {
+                        btn.isSelected = false
+                        sender.backgroundColor = .systemOrange
+                        sender.titleLabel!.textColor = .black
+                        operationBtnTag = selectedOperationBtnTag
+                        break
+                    }
+                }
+            }
+        }
+        else {
+            sender.isSelected = true
+            sender.backgroundColor = .white
+            sender.titleLabel!.textColor = .systemOrange
+            operationBtnTag = selectedOperationBtnTag
+        }
     }
     
     // Clicked SumBtn
