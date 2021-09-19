@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.LabelMain.text = self.numberString
+                self.LabelMain.text = "\(self.numberString)"
             }
         }
     }
@@ -53,20 +53,17 @@ class ViewController: UIViewController {
     // Clicked Btn 0 ~ 9
     @objc fileprivate func onNumberBtnClicked(sender: UIButton) {
         guard let inputString = sender.titleLabel?.text else { return }
+        if numberString.count == 9 { return }
         
-        // Selected arithOperationBtn
         if operationBtnTag != nil {
-            for btn in OperationBtns {
-                if btn.tag == operationBtnTag {
-                    btn.isSelected = false
-                    btn.backgroundColor = .systemOrange
-                    btn.titleLabel!.textColor = .black
-                    operationBtnTag = nil
+            for btnItem in OperationBtns {
+                if btnItem.tag == operationBtnTag {
+                    numberCalcString += (btnItem.titleLabel?.text as! String)
+                    onUnselectedBtn(sender: btnItem)
+                    numberString.removeAll()
                     break
                 }
             }
-            numberString.removeAll()
-            numberString.append("0")
         }
         
         if numberString.first == "0" { numberString.removeFirst() }
@@ -75,18 +72,26 @@ class ViewController: UIViewController {
     
     // Clciked ClearBtn
     @objc fileprivate func onClearBtnClicked(sender: UIButton) {
-        if let inputString = sender.titleLabel?.text {
-            numberString.removeAll()
-            numberString.append("0")
+        guard let btnGubun = sender.titleLabel?.text else { return }
+        
+        if btnGubun == "C" {
+            numberString = "0"
         }
+        else
+        {
+            numberCalcString.removeAll()
+        }
+        
+        fstNumber = 0
+        secNumber = nil
     }
     
     // Clicked (Add, Min, Multi, Div)Btn
     @objc fileprivate func onOperationBtnClicked(sender: UIButton) {
-        let selectedOperationBtnTag = sender.tag
+        guard let btn = sender as? UIButton else { return }
 
         if secNumber == nil {
-            secNumber = Decimal(string: numberString)
+            secNumber = Decimal(string: self.numberString)
         }
         else {
             switch operationBtnTag {
@@ -94,22 +99,29 @@ class ViewController: UIViewController {
                 // Add
                 fstNumber = fstNumber + secNumber!
                 secNumber = nil
-                numberString.removeAll()
+//                self.numberString.removeAll()
+                numberString = "\(fstNumber)"
                 break
             case 2:
                 // Miner
                 fstNumber = fstNumber - secNumber!
                 secNumber = nil
+//                self.numberString.removeAll()
+                numberString = "\(fstNumber)"
                 break
             case 3:
                 // Multi
                 fstNumber = fstNumber * secNumber!
                 secNumber = nil
+//                self.numberString.removeAll()
+                numberString = "\(fstNumber)"
                 break
             case 4:
                 // Division
                 fstNumber = fstNumber / secNumber!
                 secNumber = nil
+//                self.numberString.removeAll()
+                numberString = "\(fstNumber)"
                 break
             default:
                 break
@@ -117,30 +129,36 @@ class ViewController: UIViewController {
         }
 
         if operationBtnTag != nil {
-            if operationBtnTag != selectedOperationBtnTag {
-                for btn in OperationBtns {
-                    if btn.tag == operationBtnTag {
-                        btn.isSelected = false
-                        sender.backgroundColor = .systemOrange
-                        sender.titleLabel!.textColor = .black
-                        operationBtnTag = selectedOperationBtnTag
+            if operationBtnTag != btn.tag {
+                for btnItem in OperationBtns {
+                    if btnItem.tag == operationBtnTag {
+                        onUnselectedBtn(sender: btnItem)
                         break
                     }
                 }
             }
         }
-        else {
-            sender.isSelected = true
-            sender.backgroundColor = .white
-            sender.titleLabel!.textColor = .systemOrange
-            operationBtnTag = selectedOperationBtnTag
-        }
+        onSelectedBtn(sender: btn)
     }
     
     // Clicked SumBtn
     @objc fileprivate func onSumBtnClicked(_sender: UIButton)
     {
         
+    }
+    
+    // Selected Btn's Status
+    func onSelectedBtn(sender: UIButton) {
+        sender.backgroundColor = .white
+        sender.titleLabel!.textColor = .systemOrange
+        operationBtnTag = sender.tag
+    }
+    
+    // Unselected Btn's Status
+    func onUnselectedBtn(sender: UIButton) {
+        sender.backgroundColor = .systemOrange
+        sender.titleLabel!.textColor = .black
+        operationBtnTag = nil
     }
 }
 
