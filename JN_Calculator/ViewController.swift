@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.LabelMain.text = "\(self.numberString)"
+                self.LabelMain.text = self.numberString
             }
         }
     }
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
+//
         if numberString.first == "0" { numberString.removeFirst() }
         numberString.append(inputString)
     }
@@ -75,10 +75,10 @@ class ViewController: UIViewController {
         guard let btnGubun = sender.titleLabel?.text else { return }
         
         if btnGubun == "C" {
-            numberString = "0"
+            numberString.removeAll()
+            numberString.append("0")
         }
-        else
-        {
+        else {
             numberCalcString.removeAll()
         }
         
@@ -90,6 +90,8 @@ class ViewController: UIViewController {
     @objc fileprivate func onOperationBtnClicked(sender: UIButton) {
         guard let btn = sender as? UIButton else { return }
 
+        print("fstNumber: \(fstNumber)")
+        print("secNumber: \(secNumber)")
         if secNumber == nil {
             secNumber = Decimal(string: self.numberString)
         }
@@ -99,28 +101,28 @@ class ViewController: UIViewController {
                 // Add
                 fstNumber = fstNumber + secNumber!
                 secNumber = nil
-//                self.numberString.removeAll()
+                numberString.removeAll()
                 numberString = "\(fstNumber)"
                 break
             case 2:
                 // Miner
                 fstNumber = fstNumber - secNumber!
                 secNumber = nil
-//                self.numberString.removeAll()
+                numberString.removeAll()
                 numberString = "\(fstNumber)"
                 break
             case 3:
                 // Multi
                 fstNumber = fstNumber * secNumber!
                 secNumber = nil
-//                self.numberString.removeAll()
+                numberString.removeAll()
                 numberString = "\(fstNumber)"
                 break
             case 4:
                 // Division
                 fstNumber = fstNumber / secNumber!
                 secNumber = nil
-//                self.numberString.removeAll()
+                numberString.removeAll()
                 numberString = "\(fstNumber)"
                 break
             default:
@@ -139,6 +141,8 @@ class ViewController: UIViewController {
             }
         }
         onSelectedBtn(sender: btn)
+        print("fstNumber: \(fstNumber)")
+        print("secNumber: \(secNumber)")
     }
     
     // Clicked SumBtn
@@ -150,7 +154,7 @@ class ViewController: UIViewController {
     // Selected Btn's Status
     func onSelectedBtn(sender: UIButton) {
         sender.backgroundColor = .white
-        sender.titleLabel!.textColor = .systemOrange
+        sender.titleLabel!.textColor = .red
         operationBtnTag = sender.tag
     }
     
@@ -161,4 +165,3 @@ class ViewController: UIViewController {
         operationBtnTag = nil
     }
 }
-
