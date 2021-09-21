@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet var OperationBtns: [cornerButton]!
     @IBOutlet weak var SumBtn: cornerButton!
     
-    var numberString = "" {
+    var numberString = "0" {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -23,11 +23,11 @@ class ViewController: UIViewController {
             }
         }
     }
-    var numberHistory = Array<Dictionary<String,Decimal>>()
-    var numberCalcString: String = ""
-    var fstNumber: Decimal = 0.0
-    var secNumber: Decimal?
-    var operationBtnTag: Int?
+    var numbersCalcHistory = Array<Dictionary<String,Decimal>>()
+    var numbersCalcTemp: String = ""
+    var calcData: Decimal = 0.0
+    var calcResult: Decimal?
+    var operationBtnTag: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,18 +54,20 @@ class ViewController: UIViewController {
     @objc fileprivate func onNumberBtnClicked(sender: UIButton) {
         guard let inputString = sender.titleLabel?.text else { return }
         if numberString.count == 9 { return }
-        
-        if operationBtnTag != nil {
+        print("check1")
+        if 0 < operationBtnTag && operationBtnTag < 5 {
             for btnItem in OperationBtns {
                 if btnItem.tag == operationBtnTag {
-                    numberCalcString += (btnItem.titleLabel?.text as! String)
+                    numbersCalcTemp += (btnItem.titleLabel?.text as! String)
                     onUnselectedBtn(sender: btnItem)
                     numberString.removeAll()
+                    calcResult = nil
                     break
                 }
             }
         }
-//
+        print("check1")
+        print(numberString.first)
         if numberString.first == "0" { numberString.removeFirst() }
         numberString.append(inputString)
     }
@@ -79,89 +81,97 @@ class ViewController: UIViewController {
             numberString.append("0")
         }
         else {
-            numberCalcString.removeAll()
+            numbersCalcTemp.removeAll()
         }
         
-        fstNumber = 0
-        secNumber = nil
+        calcData = 0
+        calcResult = nil
+        
+        for btnItem in OperationBtns {
+            onUnselectedBtn(sender: btnItem)
+            operationBtnTag = 0
+        }
     }
     
     // Clicked (Add, Min, Multi, Div)Btn
     @objc fileprivate func onOperationBtnClicked(sender: UIButton) {
-        guard let btn = sender as? UIButton else { return }
-
-        print("fstNumber: \(fstNumber)")
-        print("secNumber: \(secNumber)")
-        if secNumber == nil {
-            secNumber = Decimal(string: self.numberString)
+        if calcData == 0 {
+            calcData = Decimal(string: numberString)!
         }
         else {
-            switch operationBtnTag {
-            case 1:
-                // Add
-                fstNumber = fstNumber + secNumber!
-                secNumber = nil
-                numberString.removeAll()
-                numberString = "\(fstNumber)"
-                break
-            case 2:
-                // Miner
-                fstNumber = fstNumber - secNumber!
-                secNumber = nil
-                numberString.removeAll()
-                numberString = "\(fstNumber)"
-                break
-            case 3:
-                // Multi
-                fstNumber = fstNumber * secNumber!
-                secNumber = nil
-                numberString.removeAll()
-                numberString = "\(fstNumber)"
-                break
-            case 4:
-                // Division
-                fstNumber = fstNumber / secNumber!
-                secNumber = nil
-                numberString.removeAll()
-                numberString = "\(fstNumber)"
-                break
-            default:
-                break
+            if calcResult == nil {
+                let result = onCalculatedValue(tag: operationBtnTag, fstData: calcData, secData: Decimal(string:numberString)!) as! Decimal
+                calcResult = result
+                calcData = result
+                numberString = String(describing: result)
             }
-        }
-
-        if operationBtnTag != nil {
-            if operationBtnTag != btn.tag {
+            else {
                 for btnItem in OperationBtns {
-                    if btnItem.tag == operationBtnTag {
-                        onUnselectedBtn(sender: btnItem)
-                        break
-                    }
+                    onUnselectedBtn(sender: btnItem)
                 }
             }
         }
-        onSelectedBtn(sender: btn)
-        print("fstNumber: \(fstNumber)")
-        print("secNumber: \(secNumber)")
+        onSelectedBtn(sender: sender)
     }
     
     // Clicked SumBtn
     @objc fileprivate func onSumBtnClicked(_sender: UIButton)
     {
+        numbersCalcTemp += String(describing: calcData)
+        calcResult = onCalculatedValue(tag: operationBtnTag, fstData: calcData, secData: Decimal(string:numberString)!) as! Decimal
+        numberString.removeAll()
+        numberString.append(String(describing: calcResult))
+        numbersCalcHistory.append([numbersCalcTemp:calcResult!])
         
+        // 초기화
+        calcData = 0
+        calcResult = nil
+        operationBtnTag = 0
+        numbersCalcTemp = ""
     }
     
     // Selected Btn's Status
     func onSelectedBtn(sender: UIButton) {
         sender.backgroundColor = .white
-        sender.titleLabel!.textColor = .red
+        sender.titleLabel!.tintColor = .systemOrange
         operationBtnTag = sender.tag
     }
     
     // Unselected Btn's Status
     func onUnselectedBtn(sender: UIButton) {
         sender.backgroundColor = .systemOrange
-        sender.titleLabel!.textColor = .black
-        operationBtnTag = nil
+        sender.titleLabel!.tintColor = .black
+    }
+    
+    func onCalculatedValue(tag: Int, fstData: Decimal, secData: Decimal) -> Decimal {
+        var valueData: Decimal = 0.0
+        print("secData: \(secData)")
+        if let aoTag = tag as? Int {
+            switch aoTag {
+            case 1:
+                // Add
+                valueData = fstData + secData
+                print("Tag:1")
+                break
+            case 2:
+                // Miner
+                valueData = fstData - secData
+                print("Tag:2")
+                break
+            case 3:
+                // Multi
+                valueData = fstData * secData
+                print("Tag:3")
+                break
+            case 4:
+                // Division
+                valueData = fstData / secData
+                print("Tag:4")
+                break
+            default:
+                break
+            }
+        }
+        return valueData
     }
 }
