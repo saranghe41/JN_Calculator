@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class ViewController: UIViewController {
     
@@ -23,11 +24,12 @@ class ViewController: UIViewController {
             }
         }
     }
-    var numbersCalcHistory = Array<Dictionary<String,Decimal>>()
-    var numbersCalcTemp: String = ""
+    var numbersCalcHistory = Array<Dictionary<String,Decimal>>() // 계산이력
+    var numbersCalcTemp: String = "" // Dictionary의 String 연산 변수
     var calcData: Decimal = 0.0
-    var calcResult: Decimal?
-    var operationBtnTag: Int = 0
+    var toUsedBtn: UIButton? // 사칙연산해야할 Btn
+    var clearFlag = false //
+    var valueChkFlag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,60 +56,48 @@ class ViewController: UIViewController {
     @objc fileprivate func onNumberBtnClicked(sender: UIButton) {
         guard let inputString = sender.titleLabel?.text else { return }
         if numberString.count == 9 { return }
-        print("check1")
-        if 0 < operationBtnTag && operationBtnTag < 5 {
-            for btnItem in OperationBtns {
-                if btnItem.tag == operationBtnTag {
-                    numbersCalcTemp += (btnItem.titleLabel?.text as! String)
-                    onUnselectedBtn(sender: btnItem)
-                    numberString.removeAll()
-                    calcResult = nil
-                    break
-                }
+        
+        if clearFlag {
+            if let btn = toUsedBtn {
+                onUnselectedBtn(sender: btn)
+                numberString.removeAll()
             }
         }
-        print("check1")
-        print(numberString.first)
+        
         if numberString.first == "0" { numberString.removeFirst() }
         numberString.append(inputString)
     }
     
-    // Clciked ClearBtn
+    // Clicked ClearBtn
     @objc fileprivate func onClearBtnClicked(sender: UIButton) {
         guard let btnGubun = sender.titleLabel?.text else { return }
         
         if btnGubun == "C" {
-            numberString.removeAll()
-            numberString.append("0")
+            onSelectedClear()
         }
         else {
-            numbersCalcTemp.removeAll()
-        }
-        
-        calcData = 0
-        calcResult = nil
-        
-        for btnItem in OperationBtns {
-            onUnselectedBtn(sender: btnItem)
-            operationBtnTag = 0
+            onSelectedAllClear()
         }
     }
     
     // Clicked (Add, Min, Multi, Div)Btn
     @objc fileprivate func onOperationBtnClicked(sender: UIButton) {
-        if calcData == 0 {
-            calcData = Decimal(string: numberString)!
+        guard let decData = Decimal(string: numberString) else { return }
+        
+        if !valueChkFlag {
+            calcData = decData
+            valueChkFlag = true
+            numbersCalcTemp += String(describing: calcData)
         }
         else {
-            if calcResult == nil {
-                let result = onCalculatedValue(tag: operationBtnTag, fstData: calcData, secData: Decimal(string:numberString)!) as! Decimal
-                calcResult = result
-                calcData = result
-                numberString = String(describing: result)
-            }
-            else {
-                for btnItem in OperationBtns {
-                    onUnselectedBtn(sender: btnItem)
+            if let btn = toUsedBtn {
+                if clearFlag {
+                    onUnselectedBtn(sender: btn)
+                }
+                else {
+                    let result = onCalculatedValue(btnItem: btn, fstData: calcData, secData: decData)
+                    calcData = result
+                    numberString = String(describing: calcData)
                 }
             }
         }
@@ -117,56 +107,91 @@ class ViewController: UIViewController {
     // Clicked SumBtn
     @objc fileprivate func onSumBtnClicked(_sender: UIButton)
     {
-        numbersCalcTemp += String(describing: calcData)
-        calcResult = onCalculatedValue(tag: operationBtnTag, fstData: calcData, secData: Decimal(string:numberString)!) as! Decimal
-        numberString.removeAll()
-        numberString.append(String(describing: calcResult))
-        numbersCalcHistory.append([numbersCalcTemp:calcResult!])
+        guard let decData = Decimal(string: numberString) else { return }
         
-        // 초기화
-        calcData = 0
-        calcResult = nil
-        operationBtnTag = 0
-        numbersCalcTemp = ""
+        if valueChkFlag {
+            if !clearFlag {
+                if let btn = toUsedBtn {
+                    calcData = onCalculatedValue(btnItem: btn, fstData: calcData, secData: decData)
+                }
+            }
+        }
+        else {
+            calcData = decData
+            numbersCalcTemp += String(describing: calcData)
+        }
+        
+        numbersCalcHistory.append([numbersCalcTemp:calcData])
+        
+        let result = calcData
+        
+        // clear
+        onSelectedAllClear()
+        
+        // View Labeltext
+        numberString.removeAll()
+        numberString.append(String(describing: result))
+        
+        print(numbersCalcHistory)
+        
     }
     
     // Selected Btn's Status
     func onSelectedBtn(sender: UIButton) {
         sender.backgroundColor = .white
         sender.titleLabel!.tintColor = .systemOrange
-        operationBtnTag = sender.tag
+        toUsedBtn = sender
+        clearFlag = true
+        
     }
     
     // Unselected Btn's Status
     func onUnselectedBtn(sender: UIButton) {
         sender.backgroundColor = .systemOrange
         sender.titleLabel!.tintColor = .black
+        clearFlag = false
     }
     
-    func onCalculatedValue(tag: Int, fstData: Decimal, secData: Decimal) -> Decimal {
+    
+    func onSelectedClear() {
+        numberString.removeAll()
+        numberString.append("0")
+        if let btn = toUsedBtn {
+            onUnselectedBtn(sender: btn)
+        }
+    }
+    
+    func onSelectedAllClear() {
+        onSelectedClear()
+        calcData = 0
+        valueChkFlag = false
+        numbersCalcTemp = ""
+    }
+    
+    func onCalculatedValue(btnItem: UIButton, fstData: Decimal, secData: Decimal) -> Decimal {
         var valueData: Decimal = 0.0
-        print("secData: \(secData)")
-        if let aoTag = tag as? Int {
-            switch aoTag {
+        
+        if let tag = btnItem.tag as? Int {
+            switch tag {
             case 1:
                 // Add
                 valueData = fstData + secData
-                print("Tag:1")
+                numbersCalcTemp += "➕\(String(describing: secData))"
                 break
             case 2:
                 // Miner
                 valueData = fstData - secData
-                print("Tag:2")
+                numbersCalcTemp += "➖\(String(describing: secData))"
                 break
             case 3:
                 // Multi
                 valueData = fstData * secData
-                print("Tag:3")
+                numbersCalcTemp += "✖️\(String(describing: secData))"
                 break
             case 4:
                 // Division
                 valueData = fstData / secData
-                print("Tag:4")
+                numbersCalcTemp += "➗\(String(describing: secData))"
                 break
             default:
                 break
