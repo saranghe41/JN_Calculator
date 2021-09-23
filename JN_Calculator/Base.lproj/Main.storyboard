@@ -36,9 +36,12 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                                        <state key="normal" title="C">
+                                                        <state key="normal" title="AC">
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="textChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="00x-xa-fy2"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI6-sC-Hzi" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="96" y="0.0" width="86" height="93"/>
@@ -247,7 +250,10 @@
                     </view>
                     <connections>
                         <outlet property="ClearBtn" destination="K2x-DM-sxW" id="oYi-UF-LDb"/>
+                        <outlet property="DotBtn" destination="Ran-XF-ONu" id="xnj-CK-uFk"/>
                         <outlet property="LabelMain" destination="ljH-AA-ZPP" id="zlf-Md-E4b"/>
+                        <outlet property="PersentBtn" destination="Rly-6e-fng" id="XjA-Dh-Qxf"/>
+                        <outlet property="PlusSlashMinusBtn" destination="jI6-sC-Hzi" id="Fd4-2W-qfG"/>
                         <outlet property="SumBtn" destination="xLw-vx-9gG" id="JeU-zl-9oQ"/>
                         <outletCollection property="NumberBtns" destination="gnJ-Ww-9tl" collectionClass="NSMutableArray" id="chV-YA-FPh"/>
                         <outletCollection property="NumberBtns" destination="WTr-yk-unE" collectionClass="NSMutableArray" id="2SK-hi-8tt"/>

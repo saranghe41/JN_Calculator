@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var LabelMain: UILabel!
     @IBOutlet var NumberBtns: [cornerButton]!
     @IBOutlet weak var ClearBtn: cornerButton!
+    @IBOutlet weak var PlusSlashMinusBtn: cornerButton!
+    @IBOutlet weak var DotBtn: cornerButton!
+    @IBOutlet weak var PersentBtn: cornerButton!
     @IBOutlet var OperationBtns: [cornerButton]!
     @IBOutlet weak var SumBtn: cornerButton!
     
@@ -24,7 +27,7 @@ class ViewController: UIViewController {
             }
         }
     }
-    var numbersCalcHistory = Array<Dictionary<String,Decimal>>() // 계산이력
+    var numbersCalcHistory = Array<String>() // 계산이력
     var numbersCalcTemp: String = "" // Dictionary의 String 연산 변수
     var calcData: Decimal = 0.0
     var toUsedBtn: UIButton? // 사칙연산해야할 Btn
@@ -35,7 +38,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        // Add Btn 0 ~ 9 event
+        // Add 0 ~ 9Btn event
         for btnItem in NumberBtns {
             btnItem.addTarget(self, action: #selector(onNumberBtnClicked(sender:)), for: .touchUpInside)
         }
@@ -50,11 +53,25 @@ class ViewController: UIViewController {
         
         // Add SumBtn event
         SumBtn.addTarget(self, action: #selector(onSumBtnClicked(_sender:)), for: .touchUpInside)
+        
+        // Add PlusSlashMinusBtn event
+        PlusSlashMinusBtn.addTarget(self, action: #selector(onPlusSlachMinusBtnClicked(_sender:)), for: .touchUpInside)
+        
+        // Add PersentBtn event
+        PersentBtn.addTarget(self, action: #selector(onPersentBtnClicked(_sender:)), for: .touchUpInside)
+        
+        // Add DotBtn event
+        DotBtn.addTarget(self, action: #selector(onDotBtnClicked(_sender:)), for: .touchUpInside)
     }
     
     // Clicked Btn 0 ~ 9
     @objc fileprivate func onNumberBtnClicked(sender: UIButton) {
         guard let inputString = sender.titleLabel?.text else { return }
+        
+        if ClearBtn.titleLabel?.text == "AC" {
+            self.ClearBtn.setTitle("C", for: .normal)
+        }
+        
         if numberString.count == 9 { return }
         
         if clearFlag {
@@ -64,7 +81,11 @@ class ViewController: UIViewController {
             }
         }
         
-        if numberString.first == "0" { numberString.removeFirst() }
+        if numberString.first == "0" {
+            if !numberString.contains(".") {
+                numberString.removeFirst()
+            }
+        }
         numberString.append(inputString)
     }
     
@@ -74,6 +95,7 @@ class ViewController: UIViewController {
         
         if btnGubun == "C" {
             onSelectedClear()
+            ClearBtn.setTitle("AC", for: .normal)
         }
         else {
             onSelectedAllClear()
@@ -121,7 +143,7 @@ class ViewController: UIViewController {
             numbersCalcTemp += String(describing: calcData)
         }
         
-        numbersCalcHistory.append([numbersCalcTemp:calcData])
+        numbersCalcHistory.append("\(numbersCalcTemp)")
         
         let result = calcData
         
@@ -131,9 +153,29 @@ class ViewController: UIViewController {
         // View Labeltext
         numberString.removeAll()
         numberString.append(String(describing: result))
+        clearFlag = true
         
-        print(numbersCalcHistory)
+        print("\(numbersCalcHistory) // \(calcData)")
         
+    }
+    
+    // Clicked PlusSlachMinusBtn
+    @objc fileprivate func onPlusSlachMinusBtnClicked(_sender: UIButton) {
+        guard let textData = Decimal(string:numberString) else { return }
+        numberString.removeAll()
+        numberString.append("\((-1)*textData)")
+    }
+    
+    // Clicked PersentBtn
+    @objc fileprivate func onPersentBtnClicked(_sender: UIButton) {
+        guard let textData = Decimal(string:numberString) else { return }
+        numberString.removeAll()
+        numberString.append("\(textData*(0.01))")
+    }
+    
+    // Clicked DotBtn
+    @objc fileprivate func onDotBtnClicked(_sender: UIButton) {
+        numberString.append(".")
     }
     
     // Selected Btn's Status
@@ -198,5 +240,9 @@ class ViewController: UIViewController {
             }
         }
         return valueData
+    }
+    
+    func textChanged() {
+        
     }
 }
