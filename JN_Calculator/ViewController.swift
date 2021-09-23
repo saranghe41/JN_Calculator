@@ -68,6 +68,7 @@ class ViewController: UIViewController {
     @objc fileprivate func onNumberBtnClicked(sender: UIButton) {
         guard let inputString = sender.titleLabel?.text else { return }
         
+        // Change Clear Button
         if ClearBtn.titleLabel?.text == "AC" {
             self.ClearBtn.setTitle("C", for: .normal)
         }
