@@ -226,15 +226,28 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obg-gh-5fg">
+                                        <rect key="frame" x="338.5" y="0.0" width="47.5" height="32"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" title="">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="15" weight="black"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="z4e-0Q-HJo" kind="show" identifier="segData" id="GVL-vg-tBH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
+                                    <constraint firstItem="obg-gh-5fg" firstAttribute="top" secondItem="V0E-ZU-E8G" secondAttribute="top" id="9Zh-qY-cXV"/>
                                     <constraint firstAttribute="bottom" secondItem="e7Q-MA-tP9" secondAttribute="bottom" constant="80" id="Gnc-od-7bS"/>
                                     <constraint firstItem="e7Q-MA-tP9" firstAttribute="top" secondItem="ljH-AA-ZPP" secondAttribute="bottom" constant="40" id="JP7-bo-pTS"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="ljH-AA-ZPP" secondAttribute="trailing" constant="20" id="Jo2-kB-zzr"/>
                                     <constraint firstItem="ljH-AA-ZPP" firstAttribute="leading" secondItem="V0E-ZU-E8G" secondAttribute="leadingMargin" constant="20" id="P2O-0h-R78"/>
                                     <constraint firstItem="e7Q-MA-tP9" firstAttribute="leading" secondItem="V0E-ZU-E8G" secondAttribute="leading" constant="20" id="YM8-u4-Zmv"/>
                                     <constraint firstAttribute="trailing" secondItem="e7Q-MA-tP9" secondAttribute="trailing" constant="20" id="ZbI-hL-B3X"/>
+                                    <constraint firstItem="obg-gh-5fg" firstAttribute="trailing" secondItem="ljH-AA-ZPP" secondAttribute="trailing" id="sL8-Ct-R1M"/>
                                     <constraint firstItem="ljH-AA-ZPP" firstAttribute="top" secondItem="V0E-ZU-E8G" secondAttribute="topMargin" constant="90" id="ur1-Pt-ZWp"/>
                                 </constraints>
                             </view>
@@ -273,7 +286,65 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="75"/>
+            <point key="canvasLocation" x="18.840579710144929" y="75"/>
+        </scene>
+        <!--HistoryViewController-->
+        <scene sceneID="zVl-fT-1Ph">
+            <objects>
+                <viewController id="z4e-0Q-HJo" userLabel="HistoryViewController" customClass="HistoryViewController" customModule="JN_Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PJX-q0-ThI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8O8-f8-6ZT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellType" rowHeight="69" id="l2t-cr-1gs" userLabel="CellType" customClass="CellType" customModule="JN_Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="69"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l2t-cr-1gs" id="VsR-U5-Zby">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHg-AZ-Koq">
+                                                    <rect key="frame" x="30" y="21" width="354" height="27"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="uHg-AZ-Koq" secondAttribute="bottom" constant="10" id="JHe-SO-yPY"/>
+                                                <constraint firstItem="uHg-AZ-Koq" firstAttribute="top" secondItem="VsR-U5-Zby" secondAttribute="topMargin" constant="10" id="PTU-zo-qPX"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="uHg-AZ-Koq" secondAttribute="trailing" constant="10" id="SRE-CD-wZL"/>
+                                                <constraint firstItem="uHg-AZ-Koq" firstAttribute="leading" secondItem="VsR-U5-Zby" secondAttribute="leadingMargin" constant="10" id="o2m-E3-rDH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="LabelMain" destination="uHg-AZ-Koq" id="68R-bn-YSJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ggO-7N-fls"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8O8-f8-6ZT" firstAttribute="top" secondItem="ggO-7N-fls" secondAttribute="top" id="BFm-Yt-mnG"/>
+                            <constraint firstItem="8O8-f8-6ZT" firstAttribute="leading" secondItem="ggO-7N-fls" secondAttribute="leading" id="Dw8-2R-1eM"/>
+                            <constraint firstItem="ggO-7N-fls" firstAttribute="bottom" secondItem="8O8-f8-6ZT" secondAttribute="bottom" id="EbL-aJ-5sg"/>
+                            <constraint firstItem="ggO-7N-fls" firstAttribute="trailing" secondItem="8O8-f8-6ZT" secondAttribute="trailing" id="RdD-er-Lqj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="j8E-jC-gpN"/>
+                    <connections>
+                        <outlet property="TableViewMain" destination="8O8-f8-6ZT" id="THN-Qv-e4D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0cP-Zy-yKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="963.76811594202911" y="75"/>
         </scene>
     </scenes>
     <resources>
@@ -281,11 +352,15 @@
         <image name="equal" catalog="system" width="128" height="72"/>
         <image name="minus" catalog="system" width="128" height="24"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="percent" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.slash.minus" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

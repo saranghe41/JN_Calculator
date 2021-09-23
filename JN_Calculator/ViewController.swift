@@ -144,7 +144,7 @@ class ViewController: UIViewController {
             numbersCalcTemp += String(describing: calcData)
         }
         
-        numbersCalcHistory.append("\(numbersCalcTemp)")
+        numbersCalcHistory.append("\(numbersCalcTemp)﹦\(calcData)")
         
         let result = calcData
         
@@ -219,22 +219,22 @@ class ViewController: UIViewController {
             case 1:
                 // Add
                 valueData = fstData + secData
-                numbersCalcTemp += "➕\(String(describing: secData))"
+                numbersCalcTemp += "＋\(String(describing: secData))"
                 break
             case 2:
                 // Miner
                 valueData = fstData - secData
-                numbersCalcTemp += "➖\(String(describing: secData))"
+                numbersCalcTemp += "－\(String(describing: secData))"
                 break
             case 3:
                 // Multi
                 valueData = fstData * secData
-                numbersCalcTemp += "✖️\(String(describing: secData))"
+                numbersCalcTemp += "×\(String(describing: secData))"
                 break
             case 4:
                 // Division
                 valueData = fstData / secData
-                numbersCalcTemp += "➗\(String(describing: secData))"
+                numbersCalcTemp += "÷\(String(describing: secData))"
                 break
             default:
                 break
@@ -243,7 +243,11 @@ class ViewController: UIViewController {
         return valueData
     }
     
-    func textChanged() {
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let id = segue.identifier, id == "segData" {
+            if let controller = segue.destination as? HistoryViewController {
+                controller.historyArry = numbersCalcHistory
+            }
+        }
     }
 }
