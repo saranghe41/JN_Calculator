@@ -28,10 +28,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if let history = historyArry {
             if let rowData = history[indexPath.row] as? String {
-                cell.LabelMain.text = rowData
+                cell.LabelMain.text = "\(indexPath.row+1))  \(rowData)"
             }
         }
-        
         return cell
     }
     
