@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.LabelMain.text = self.numberString
+                self.LabelMain.text = self.numberFormatter(sender: self.numberString)
             }
         }
     }
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
         if !valueChkFlag {
             calcData = decData
             valueChkFlag = true
-            numbersCalcTemp += String(describing: calcData)
+            numbersCalcTemp += numberFormatter(sender: String(describing: calcData))
         }
         else {
             if let btn = toUsedBtn {
@@ -141,7 +141,7 @@ class ViewController: UIViewController {
         }
         else {
             calcData = decData
-            numbersCalcTemp += String(describing: calcData)
+            numbersCalcTemp += numberFormatter(sender: String(describing: calcData))
         }
         
         numbersCalcHistory.append("\(numbersCalcTemp)﹦\(calcData)")
@@ -219,22 +219,22 @@ class ViewController: UIViewController {
             case 1:
                 // Add
                 valueData = fstData + secData
-                numbersCalcTemp += "＋\(String(describing: secData))"
+                numbersCalcTemp += "＋\(numberFormatter(sender: String(describing: secData)))"
                 break
             case 2:
                 // Miner
                 valueData = fstData - secData
-                numbersCalcTemp += "－\(String(describing: secData))"
+                numbersCalcTemp += "－\(numberFormatter(sender: String(describing: secData)))"
                 break
             case 3:
                 // Multi
                 valueData = fstData * secData
-                numbersCalcTemp += "×\(String(describing: secData))"
+                numbersCalcTemp += "×\(numberFormatter(sender: String(describing: secData)))"
                 break
             case 4:
                 // Division
                 valueData = fstData / secData
-                numbersCalcTemp += "÷\(String(describing: secData))"
+                numbersCalcTemp += "÷\(numberFormatter(sender: String(describing: secData)))"
                 break
             default:
                 break
@@ -249,5 +249,15 @@ class ViewController: UIViewController {
                 controller.historyArry = numbersCalcHistory
             }
         }
+    }
+    
+    func numberFormatter(sender: String) -> String {
+        let numberFomatter = NumberFormatter()
+        numberFomatter.numberStyle = .decimal
+        numberFomatter.maximumFractionDigits = 10
+        let value = Decimal(string: sender)
+        guard let result = numberFomatter.string(for: value) else { return sender }
+        
+        return result
     }
 }
