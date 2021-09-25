@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,60 +20,67 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0E-ZU-E8G">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <label opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljH-AA-ZPP">
-                                        <rect key="frame" x="28" y="118" width="358" height="80"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="67"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljH-AA-ZPP">
+                                        <rect key="frame" x="28" y="98" width="358" height="95.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="80"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="e7Q-MA-tP9">
-                                        <rect key="frame" x="20" y="238" width="374" height="520"/>
+                                        <rect key="frame" x="20" y="233.5" width="374" height="504.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Hn-Di8">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="96"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="93"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2x-DM-sxW" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <state key="normal" title="C">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                        <state key="normal" title="AC">
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="textChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="00x-xa-fy2"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI6-sC-Hzi" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="96" y="0.0" width="86" height="96"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI6-sC-Hzi" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
+                                                        <rect key="frame" x="96" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <state key="normal" title="+/-">
+                                                        <color key="tintColor" systemColor="labelColor"/>
+                                                        <state key="normal" image="plus.slash.minus" catalog="system">
                                                             <color key="titleColor" systemColor="labelColor"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23" weight="semibold"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rly-6e-fng" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="192" y="0.0" width="86" height="96"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rly-6e-fng" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
+                                                        <rect key="frame" x="192" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <state key="normal" title="%">
+                                                        <color key="tintColor" systemColor="labelColor"/>
+                                                        <state key="normal" image="percent" catalog="system">
                                                             <color key="titleColor" systemColor="labelColor"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23" weight="semibold"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4p-f7-V7m" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="288" y="0.0" width="86" height="96"/>
+                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4p-f7-V7m" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
+                                                        <rect key="frame" x="288" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                                         </accessibility>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <state key="normal" title="÷">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                        <color key="tintColor" systemColor="labelColor"/>
+                                                        <state key="normal" image="divide" catalog="system">
                                                             <color key="titleColor" systemColor="labelColor"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                                         </state>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="edD-JS-xap">
-                                                <rect key="frame" x="0.0" y="106" width="374" height="96"/>
+                                                <rect key="frame" x="0.0" y="103" width="374" height="93"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYU-oa-YS9" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="7">
@@ -80,7 +88,7 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26a-nK-A66" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="96" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="96" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="8">
@@ -88,28 +96,29 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIg-ty-Ee5" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="192" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="192" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="9">
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qS-6w-dxb" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="288" y="0.0" width="86" height="96"/>
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qS-6w-dxb" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
+                                                        <rect key="frame" x="288" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <state key="normal" title="×">
+                                                        <color key="tintColor" systemColor="labelColor"/>
+                                                        <state key="normal" image="multiply" catalog="system">
                                                             <color key="titleColor" systemColor="labelColor"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                                         </state>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FAq-0L-ymS">
-                                                <rect key="frame" x="0.0" y="212" width="374" height="96"/>
+                                                <rect key="frame" x="0.0" y="206" width="374" height="92.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onp-fe-PXg" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="92.5"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="4">
@@ -117,7 +126,7 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9y-yu-kEv" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="96" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="96" y="0.0" width="86" height="92.5"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="5">
@@ -125,28 +134,29 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9r-OH-MHW" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="192" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="192" y="0.0" width="86" height="92.5"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="6">
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDt-Rx-Df7" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="288" y="0.0" width="86" height="96"/>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDt-Rx-Df7" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
+                                                        <rect key="frame" x="288" y="0.0" width="86" height="92.5"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <state key="normal" title="﹣">
+                                                        <color key="tintColor" systemColor="labelColor"/>
+                                                        <state key="normal" image="minus" catalog="system">
                                                             <color key="titleColor" systemColor="labelColor"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                                         </state>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gbX-Wg-Ebh">
-                                                <rect key="frame" x="0.0" y="318" width="374" height="96"/>
+                                                <rect key="frame" x="0.0" y="308.5" width="374" height="93"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnJ-Ww-9tl" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="1">
@@ -154,7 +164,7 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTr-yk-unE" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="96" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="96" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="2">
@@ -162,28 +172,29 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0A-Nd-d2y" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="192" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="192" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="3">
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOW-Zx-xKD" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="288" y="0.0" width="86" height="96"/>
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOW-Zx-xKD" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
+                                                        <rect key="frame" x="288" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <state key="normal" title="﹢">
+                                                        <color key="tintColor" systemColor="labelColor"/>
+                                                        <state key="normal" image="plus" catalog="system">
                                                             <color key="titleColor" systemColor="labelColor"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                                         </state>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PTk-wY-Baz">
-                                                <rect key="frame" x="0.0" y="424" width="374" height="96"/>
+                                                <rect key="frame" x="0.0" y="411.5" width="374" height="93"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sx-Ua-giy" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title="0">
@@ -191,39 +202,53 @@
                                                         </state>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Jj-Zx-uDo">
-                                                        <rect key="frame" x="96" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="96" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="labelColor"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ran-XF-ONu" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="192" y="0.0" width="86" height="96"/>
+                                                        <rect key="frame" x="192" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <state key="normal" title=".">
                                                             <color key="titleColor" systemColor="labelColor"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLw-vx-9gG" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="288" y="0.0" width="86" height="96"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLw-vx-9gG" customClass="cornerButton" customModule="JN_Calculator" customModuleProvider="target">
+                                                        <rect key="frame" x="288" y="0.0" width="86" height="93"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <state key="normal" title="﹦">
+                                                        <color key="tintColor" systemColor="labelColor"/>
+                                                        <state key="normal" image="equal" catalog="system">
                                                             <color key="titleColor" systemColor="labelColor"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                                         </state>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obg-gh-5fg">
+                                        <rect key="frame" x="338.5" y="0.0" width="47.5" height="32"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" title="">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="15" weight="black"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="z4e-0Q-HJo" kind="show" identifier="segData" id="GVL-vg-tBH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="e7Q-MA-tP9" secondAttribute="bottom" constant="60" id="Gnc-od-7bS"/>
+                                    <constraint firstItem="obg-gh-5fg" firstAttribute="top" secondItem="V0E-ZU-E8G" secondAttribute="top" id="9Zh-qY-cXV"/>
+                                    <constraint firstAttribute="bottom" secondItem="e7Q-MA-tP9" secondAttribute="bottom" constant="80" id="Gnc-od-7bS"/>
                                     <constraint firstItem="e7Q-MA-tP9" firstAttribute="top" secondItem="ljH-AA-ZPP" secondAttribute="bottom" constant="40" id="JP7-bo-pTS"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="ljH-AA-ZPP" secondAttribute="trailing" constant="20" id="Jo2-kB-zzr"/>
                                     <constraint firstItem="ljH-AA-ZPP" firstAttribute="leading" secondItem="V0E-ZU-E8G" secondAttribute="leadingMargin" constant="20" id="P2O-0h-R78"/>
                                     <constraint firstItem="e7Q-MA-tP9" firstAttribute="leading" secondItem="V0E-ZU-E8G" secondAttribute="leading" constant="20" id="YM8-u4-Zmv"/>
                                     <constraint firstAttribute="trailing" secondItem="e7Q-MA-tP9" secondAttribute="trailing" constant="20" id="ZbI-hL-B3X"/>
-                                    <constraint firstItem="ljH-AA-ZPP" firstAttribute="top" secondItem="V0E-ZU-E8G" secondAttribute="topMargin" constant="110" id="ur1-Pt-ZWp"/>
+                                    <constraint firstItem="obg-gh-5fg" firstAttribute="trailing" secondItem="ljH-AA-ZPP" secondAttribute="trailing" id="sL8-Ct-R1M"/>
+                                    <constraint firstItem="ljH-AA-ZPP" firstAttribute="top" secondItem="V0E-ZU-E8G" secondAttribute="topMargin" constant="90" id="ur1-Pt-ZWp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -238,7 +263,10 @@
                     </view>
                     <connections>
                         <outlet property="ClearBtn" destination="K2x-DM-sxW" id="oYi-UF-LDb"/>
+                        <outlet property="DotBtn" destination="Ran-XF-ONu" id="xnj-CK-uFk"/>
                         <outlet property="LabelMain" destination="ljH-AA-ZPP" id="zlf-Md-E4b"/>
+                        <outlet property="PersentBtn" destination="Rly-6e-fng" id="XjA-Dh-Qxf"/>
+                        <outlet property="PlusSlashMinusBtn" destination="jI6-sC-Hzi" id="Fd4-2W-qfG"/>
                         <outlet property="SumBtn" destination="xLw-vx-9gG" id="JeU-zl-9oQ"/>
                         <outletCollection property="NumberBtns" destination="gnJ-Ww-9tl" collectionClass="NSMutableArray" id="chV-YA-FPh"/>
                         <outletCollection property="NumberBtns" destination="WTr-yk-unE" collectionClass="NSMutableArray" id="2SK-hi-8tt"/>
@@ -258,12 +286,81 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="75"/>
+            <point key="canvasLocation" x="18.840579710144929" y="75"/>
+        </scene>
+        <!--HistoryViewController-->
+        <scene sceneID="zVl-fT-1Ph">
+            <objects>
+                <viewController id="z4e-0Q-HJo" userLabel="HistoryViewController" customClass="HistoryViewController" customModule="JN_Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PJX-q0-ThI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8O8-f8-6ZT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellType" rowHeight="69" id="l2t-cr-1gs" userLabel="CellType" customClass="CellType" customModule="JN_Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="69"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l2t-cr-1gs" id="VsR-U5-Zby">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHg-AZ-Koq">
+                                                    <rect key="frame" x="30" y="21" width="354" height="27"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="uHg-AZ-Koq" secondAttribute="bottom" constant="10" id="JHe-SO-yPY"/>
+                                                <constraint firstItem="uHg-AZ-Koq" firstAttribute="top" secondItem="VsR-U5-Zby" secondAttribute="topMargin" constant="10" id="PTU-zo-qPX"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="uHg-AZ-Koq" secondAttribute="trailing" constant="10" id="SRE-CD-wZL"/>
+                                                <constraint firstItem="uHg-AZ-Koq" firstAttribute="leading" secondItem="VsR-U5-Zby" secondAttribute="leadingMargin" constant="10" id="o2m-E3-rDH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="LabelMain" destination="uHg-AZ-Koq" id="68R-bn-YSJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ggO-7N-fls"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8O8-f8-6ZT" firstAttribute="top" secondItem="ggO-7N-fls" secondAttribute="top" id="BFm-Yt-mnG"/>
+                            <constraint firstItem="8O8-f8-6ZT" firstAttribute="leading" secondItem="ggO-7N-fls" secondAttribute="leading" id="Dw8-2R-1eM"/>
+                            <constraint firstItem="ggO-7N-fls" firstAttribute="bottom" secondItem="8O8-f8-6ZT" secondAttribute="bottom" id="EbL-aJ-5sg"/>
+                            <constraint firstItem="ggO-7N-fls" firstAttribute="trailing" secondItem="8O8-f8-6ZT" secondAttribute="trailing" id="RdD-er-Lqj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="j8E-jC-gpN"/>
+                    <connections>
+                        <outlet property="TableViewMain" destination="8O8-f8-6ZT" id="THN-Qv-e4D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0cP-Zy-yKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="963.76811594202911" y="75"/>
         </scene>
     </scenes>
     <resources>
+        <image name="divide" catalog="system" width="128" height="103"/>
+        <image name="equal" catalog="system" width="128" height="72"/>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="multiply" catalog="system" width="128" height="111"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="percent" catalog="system" width="128" height="121"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.slash.minus" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
