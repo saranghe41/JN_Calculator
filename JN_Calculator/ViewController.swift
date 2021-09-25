@@ -23,7 +23,14 @@ class ViewController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.LabelMain.text = self.numberFormatter(sender: self.numberString)
+                guard let value = Decimal(string: self.numberString) else { return }
+                
+                if -1 <= value, value < 1 {
+                    self.LabelMain.text = self.numberString
+                }
+                else {
+                    self.LabelMain.text = self.numberFormatter(sender: self.numberString)
+                }
             }
         }
     }
@@ -162,16 +169,19 @@ class ViewController: UIViewController {
     
     // Clicked PlusSlachMinusBtn
     @objc fileprivate func onPlusSlachMinusBtnClicked(_sender: UIButton) {
-        guard let textData = Decimal(string:numberString) else { return }
-        numberString.removeAll()
-        numberString.append("\((-1)*textData)")
+        if numberString.contains("-") {
+            numberString.remove(at: numberString.startIndex)
+        }
+        else {
+            numberString = "-" + numberString
+        }
     }
     
     // Clicked PersentBtn
     @objc fileprivate func onPersentBtnClicked(_sender: UIButton) {
         guard let textData = Decimal(string:numberString) else { return }
         numberString.removeAll()
-        numberString.append("\(textData*(0.01))")
+        numberString.append("\(textData * (0.01))")
     }
     
     // Clicked DotBtn
